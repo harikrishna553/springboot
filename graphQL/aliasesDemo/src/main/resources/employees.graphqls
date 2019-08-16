@@ -1,0 +1,26 @@
+type Query {
+    employees(first: Int, last: Int): [Employee]
+    employee(id: Int!) : Employee
+}
+
+type Employee {
+    id: Int
+    firstName: String
+    lastName: String
+    email: String
+    permanentAddress: Address
+    temporaryAddress: Address
+    department: Department
+}
+
+type Address {
+	id: Int
+	city: String
+	state: String
+	country: String
+}
+
+type Department{
+	id: Int
+	departmentName: String
+}
