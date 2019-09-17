@@ -1,0 +1,24 @@
+projectTechName: chat server
+---
+
+# Test profile configurations
+spring:
+    profiles: test
+name: test-YAML
+environment: test
+servers: 
+    - www.abc.test.com
+    - www.xyz.test.com
+---
+ 
+# Prod profile configurations
+spring:
+    profiles: prod
+name: prod-YAML
+environment: production
+servers: 
+    - www.abc.prodcom
+    - www.xyz.prod.com
+---
+
+noOfDevelopers: 12
