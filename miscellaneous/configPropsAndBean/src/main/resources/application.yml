@@ -1,0 +1,9 @@
+app:
+  datasource:
+    userName: krishna
+    password: password123
+    
+hive:
+  datasource:
+    userName: ram
+    password: pk123
