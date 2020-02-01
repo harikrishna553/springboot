@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Implementation-Title: manyToMany
+Implementation-Version: 1
+Build-Jdk-Spec: 1.8
+Created-By: Maven Integration for Eclipse
+
