@@ -1,0 +1,12 @@
+<employees>
+	<employee>
+		<id>6</id>
+		<firstName>Sharief</firstName>
+		<lastName>Khan</lastName>
+	</employee>
+	<employee>
+		<id>7</id>
+		<firstName>Joel</firstName>
+		<lastName>Chelli</lastName>
+	</employee>
+</employees>
