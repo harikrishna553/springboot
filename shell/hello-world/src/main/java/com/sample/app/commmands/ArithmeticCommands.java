@@ -3,7 +3,7 @@ package com.sample.app.commmands;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellComponent;
 
-@ShellComponent
+@ShellComponent(value="Commands to perform Arithmetic Operations")
 public class ArithmeticCommands {
 
 	@ShellMethod("Add two integers together.")
