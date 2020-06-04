@@ -1,8 +1,10 @@
 package com.sample.app.commmands;
 
+import org.springframework.shell.standard.ShellCommandGroup;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
+@ShellCommandGroup("Named Parameters")
 @ShellComponent(value = "Named Parameters Demo")
 public class NamedParams {
 	@ShellMethod(value = "Commands to print User Details", key = "get-user")

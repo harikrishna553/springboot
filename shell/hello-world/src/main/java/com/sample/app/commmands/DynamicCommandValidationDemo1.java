@@ -1,9 +1,11 @@
 package com.sample.app.commmands;
 
 import org.springframework.shell.Availability;
+import org.springframework.shell.standard.ShellCommandGroup;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
+@ShellCommandGroup("Dynamic Command Validation")
 @ShellComponent(value = "Connect to Database")
 public class DynamicCommandValidationDemo1 {
 

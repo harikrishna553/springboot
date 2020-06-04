@@ -1,9 +1,11 @@
 package com.sample.app.commmands;
 
+import org.springframework.shell.standard.ShellCommandGroup;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
+@ShellCommandGroup("Named Parameters")
 @ShellComponent(value = "Specify Multiple Named Parameter keys using @ShellOption")
 public class CustomizeMultipleNamedKeysForSingleParameter {
 	@ShellMethod(value = "Commands to print Person Details", key = "print-person", prefix = "-")

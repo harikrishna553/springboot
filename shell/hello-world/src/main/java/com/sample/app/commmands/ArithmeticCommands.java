@@ -1,8 +1,10 @@
 package com.sample.app.commmands;
 
 import org.springframework.shell.standard.ShellMethod;
+import org.springframework.shell.standard.ShellCommandGroup;
 import org.springframework.shell.standard.ShellComponent;
 
+@ShellCommandGroup("Arithmetic Commands")
 @ShellComponent(value="Commands to perform Arithmetic Operations")
 public class ArithmeticCommands {
 

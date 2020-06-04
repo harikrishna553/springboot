@@ -1,9 +1,11 @@
 package com.sample.app.commmands;
 
+import org.springframework.shell.standard.ShellCommandGroup;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
+@ShellCommandGroup("Miscellaneous")
 @ShellComponent(value = "Multi Valued Parameters Demo")
 public class MultiValuedParametersDemo {
 

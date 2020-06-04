@@ -1,8 +1,10 @@
 package com.sample.app.commmands;
 
+import org.springframework.shell.standard.ShellCommandGroup;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
+@ShellCommandGroup("Miscellaneous")
 @ShellComponent(value = "Handle Boolean Values")
 public class BooleanTypeDemo {
 

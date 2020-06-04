@@ -1,8 +1,10 @@
 package com.sample.app.commmands;
 
+import org.springframework.shell.standard.ShellCommandGroup;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
+@ShellCommandGroup("Named Parameters")
 @ShellComponent(value = "Customize Named Parameters Prefix")
 public class CustomizeNamedParamKeysPrefix {
 	@ShellMethod(value = "Commands to print Student Details", key = "print-student", prefix="-")

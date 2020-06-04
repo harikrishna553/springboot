@@ -1,9 +1,11 @@
 package com.sample.app.commmands;
 
+import org.springframework.shell.standard.ShellCommandGroup;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
+@ShellCommandGroup("Miscellaneous")
 @ShellComponent(value = "Specify Default Values using using @ShellOption")
 public class DefaultValues {
 
