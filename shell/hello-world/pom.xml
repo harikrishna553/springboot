@@ -15,11 +15,13 @@
 
 	<dependencies>
 
+		<!-- https://mvnrepository.com/artifact/org.springframework.shell/spring-shell-starter -->
 		<dependency>
 			<groupId>org.springframework.shell</groupId>
 			<artifactId>spring-shell-starter</artifactId>
-			<version>2.0.1.BUILD-SNAPSHOT</version>
+			<version>2.0.1.RELEASE</version>
 		</dependency>
+
 
 	</dependencies>
 

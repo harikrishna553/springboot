@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyPromptProvider implements PromptProvider {
 
-	@Override
 	public AttributedString getPrompt() {
 		return new AttributedString("CLI-DEMO-PROMPT:>", AttributedStyle.DEFAULT.foreground(AttributedStyle.BLUE));
 	}
