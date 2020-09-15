@@ -47,4 +47,22 @@ public class ShellOutputHelper {
 	public String getErrorMessage(String message) {
 		return getColored(message, ShellPromptColor.valueOf(errorColor));
 	}
+
+	public void printInfo(String message) {
+		print(message, ShellPromptColor.valueOf(infoColor));
+	}
+
+	public void print(String message) {
+		this.print(message, ShellPromptColor.valueOf(infoColor));
+	}
+
+	public void print(String message, ShellPromptColor color) {
+		String toPrint = message;
+		if (color != null) {
+			toPrint = getColored(message, color);
+		}
+		terminal.writer().println(toPrint);
+		terminal.flush();
+	}
+
 }
