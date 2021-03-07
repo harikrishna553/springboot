@@ -1,0 +1,57 @@
+spring:
+  profiles.active: local
+---
+server:
+  port: 1234
+
+---
+spring:   
+  datasource:
+    communicationtimeout: 60000
+    jpa:
+      hibernate:
+        ddl-auto: none
+    hikari:
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      maximum-pool-size: 20
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database-platform:  org.hibernate.dialect.MySQL5InnoDBDialect
+---
+spring:
+  jpa:
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: false
+---
+spring:
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: never
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: quartz-demo-app
+            instanceId: AUTO
+            instanceIdGenerator:
+              class: com.sample.app.generators.CustomQuartzInstanceIdGenerator
+          threadPool:
+            threadCount: 20
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            useProperties: true
+            misfireThreshold: 60000
+            tablePrefix: qrtz_
+            isClustered: true
+          plugin:
+            shutdownHook:
+              class: org.quartz.plugins.management.ShutdownHookPlugin
+              cleanShutdown: TRUE
