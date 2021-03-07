@@ -1,9 +1,11 @@
 package com.sample.app.controller;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
@@ -24,29 +26,33 @@ import io.swagger.annotations.ApiOperation;
 @Api(tags = { "This section contains all Employee Speicifc Operations" })
 public class EmployeeController {
 
-	private static AtomicInteger counter = new AtomicInteger();
+  private static AtomicInteger counter = new AtomicInteger();
 
-	private static Map<Integer, Employee> internalCache = new ConcurrentHashMap<>();
+  private static Map<Integer, Employee> internalCache = new ConcurrentHashMap<>();
 
-	@RequestMapping(method = RequestMethod.POST)
-	@ApiOperation(value = "Create new employee", notes = "Create new employee")
-	public ResponseEntity<Employee> create(@RequestBody @Valid Employee employee) {
-		int newId = counter.incrementAndGet();
-		employee.setId(newId);
+  @RequestMapping(method = RequestMethod.POST)
+  @ApiOperation(value = "Create new employee", notes = "Create new employee")
+  public ResponseEntity<Employee> create(@RequestBody @Valid Employee employee) {
+    int newId = counter.incrementAndGet();
+    employee.setId(newId);
 
-		internalCache.put(newId, employee);
+    if (employee.getFirstName().equalsIgnoreCase(employee.getLastName())) {
+      throw new ConstraintViolationException("FirstName and LastName must not be equal", Collections.EMPTY_SET);
+    }
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(employee);
-	}
+    internalCache.put(newId, employee);
 
-	@RequestMapping(method = RequestMethod.GET)
-	@ApiOperation(value = "Get employee by id", notes = "Get employee by  id")
-	public ResponseEntity<Employee> create(@RequestParam(name = "empId", required=true) Integer empId) {
-		Employee emp = internalCache.get(empId);
-		
-		if(emp == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		}
-		return ResponseEntity.status(HttpStatus.OK).body(emp);
-	}
+    return ResponseEntity.status(HttpStatus.CREATED).body(employee);
+  }
+
+  @RequestMapping(method = RequestMethod.GET)
+  @ApiOperation(value = "Get employee by id", notes = "Get employee by  id")
+  public ResponseEntity<Employee> create(@RequestParam(name = "empId", required = true) Integer empId) {
+    Employee emp = internalCache.get(empId);
+
+    if (emp == null) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+    return ResponseEntity.status(HttpStatus.OK).body(emp);
+  }
 }
