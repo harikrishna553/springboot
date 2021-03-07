@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -36,5 +37,17 @@ public class CustomErrorHandler extends ResponseEntityExceptionHandler {
 
 		// If you want to throw apiError directly, uncomment this
 		// return new ResponseEntity(apiError, apiError.getStatus());
+	}
+
+	@Override
+	protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex,
+			HttpHeaders headers, HttpStatus status, WebRequest request) {
+		String error = ex.getParameterName() + " -> parameter is missing in request";
+
+		ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), error);
+		return handleExceptionInternal(ex, apiError, headers, apiError.getStatus(), request);
+
+		// If you want to throw apiError directly, uncomment this
+		// return new ResponseEntity<Object>(apiError, apiError.getStatus());
 	}
 }
