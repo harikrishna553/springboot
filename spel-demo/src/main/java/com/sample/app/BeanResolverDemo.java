@@ -14,7 +14,7 @@ public class BeanResolverDemo {
 		StandardEvaluationContext context = new StandardEvaluationContext();
 		context.setBeanResolver(new MyBeanResolver());
 		context.setVariable("emp", Employee.class);
-
+	
 		Employee emp = (Employee) spelExpressionParser.parseExpression("@emp").getValue(context);
 
 		System.out.println(emp);
