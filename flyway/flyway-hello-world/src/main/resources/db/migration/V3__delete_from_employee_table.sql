@@ -1,0 +1,1 @@
+DELETE FROM EMPLOYEE WHERE name = 'Krishna';
