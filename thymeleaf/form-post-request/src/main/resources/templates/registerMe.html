@@ -1,0 +1,16 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Person registration</title>
+</head>
+
+<body>
+
+	<form action="#" th:action = "@{/persons}" th:object="${person}" method="post">
+		Name: <input type="text" th:field="*{name}"/> 
+		Age: <input type="text"  th:field="*{age}"/> 
+		<input type="submit" value="save" />
+		<input type="reset" value="clear" />
+	</form>
+	
+</body>
+</html>
