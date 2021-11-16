@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Employees information</title>
+</head>
+
+<body>
+
+	<span th:switch="${msgCode}"> 
+		<i th:case="1">Hi Welcome to the application</i> 
+		<i th:case="2">Good Day!!!!!</i>
+		<i th:case="*">Good bye......</i>
+	</span>
+
+</body>
+</html>
+
+
