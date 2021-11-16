@@ -1,0 +1,4 @@
+app:
+  name: Chat server
+  version: 1.23
+  description: ${app.name} is a spring boot applicaiton and app is at version ${app.version}
