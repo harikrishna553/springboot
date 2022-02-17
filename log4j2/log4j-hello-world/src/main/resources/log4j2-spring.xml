@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration>
+	<Properties>
+		<Property name="LOG_PATTERN">
+			%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36}.class Line:%L
+			%M()-User:%X{userName} - %msg%xEx%n
+		</Property>
+	</Properties>
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${LOG_PATTERN}" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Root level="ERROR">
+			<AppenderRef ref="Console" />
+		</Root>
+		<logger name="com.sample.app" level="INFO" />
+		<logger name="org.springframework" level="ERROR" />
+		<logger name="springfox.documentation" level="ERROR" />
+		<logger name="springfox.documentation" level="ERROR" />
+		<logger name="org.springframework.security" level="ERROR" />
+	</Loggers>
+</Configuration>
