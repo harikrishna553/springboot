@@ -1,0 +1,2 @@
+springdoc:
+  swagger-ui.path: /swagger-ui-app.html
