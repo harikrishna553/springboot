@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @CrossOrigin("*")
 public class UserController {
 
-	@Parameter(name = "authorization", in = ParameterIn.HEADER, description = "Bearer token", required = true, examples = {
+	@Parameter(name = "authorization1", in = ParameterIn.HEADER, description = "Bearer token", required = true, examples = {
 			@ExampleObject(name = "example1", value = "Bearer 1233rada"),
 			@ExampleObject(name = "example2", value = "Bearer ASDSFA") })
 	@Parameter(name = "infoLevel", in = ParameterIn.HEADER, description = "info level", required = true, schema = @Schema(type = "string", allowableValues = {
