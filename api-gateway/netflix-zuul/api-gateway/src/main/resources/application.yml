@@ -1,0 +1,7 @@
+zuul:
+  host:
+    connect-timeout-millis: 60000
+    socket-timeout-millis: 60000
+  routes:
+    user.url: http://localhost:1234
+    welcome.url: http://localhost:2345
