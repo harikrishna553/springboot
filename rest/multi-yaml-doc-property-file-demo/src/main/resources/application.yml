@@ -1,0 +1,35 @@
+spring:
+  profiles:
+    active: qa
+    
+globalProp1: global_p1
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+    
+prop1: dev_p1
+prop2: dev_p2
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: qa
+      
+prop1: qa_p1
+prop2: qa_p2
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+      
+prop1: prod_p1
+prop2: prod_p2
+
