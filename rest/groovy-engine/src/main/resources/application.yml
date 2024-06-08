@@ -1,0 +1,23 @@
+spring:   
+  datasource:
+    communicationtimeout: 60000
+    jpa:
+      hibernate:
+        ddl-auto: none
+    hikari:
+      connection-timeout: 250000
+      idle-timeout: 300000
+      max-lifetime: 1000000
+      maximum-pool-size: 20
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database-platform:  org.hibernate.dialect.H2Dialect 
+---
+spring:
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: false
