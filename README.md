@@ -29,9 +29,13 @@ Each sub-project has its own source folder and `pom.xml`. Most projects are conf
    cd springboot
 
 2. Navigate to the example you want to run:
+```   
 cd crud/springboot-crud-restapi
+```
 
-3. Start the application:
+4. Start the application:
+```
 mvn spring-boot:run
+```
 
 Open a browser or use Postman to test the endpoints as documented in the source files or submodule README files.
