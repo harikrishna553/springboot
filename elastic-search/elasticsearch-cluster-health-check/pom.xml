@@ -47,8 +47,8 @@ https://mvnrepository.com/artifact/co.elastic.clients/elasticsearch-java -->
 		https://mvnrepository.com/artifact/org.springframework.data/spring-data-elasticsearch -->
 		<dependency>
 			<groupId>org.springframework.data</groupId>
-			<artifactId>
-			spring-data-elasticsearch</artifactId>n> </dependency>
+			<artifactId>spring-data-elasticsearch</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.elasticsearch.client</groupId>
 			<artifactId>elasticsearch-rest-client</artifactId>
