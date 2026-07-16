@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.sample.app</groupId>
+	<artifactId>employee-mcp</artifactId>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+	<name>employee-mcp</name>
+	<description>
+		Employee MCP Server — A complete educational project demonstrating how
+		to build
+		an MCP (Model Context Protocol) Server using Spring AI. Covers Tools,
+		Resources,
+		Prompts, Pagination, Validation, and Error Handling with an in-memory
+		employee dataset.
+	</description>
+
+	<properties>
+		<!-- Java 21 bytecode target. Homebrew Maven runs on JDK 23 and cannot
+         set release 24 (TypeTag incompatibility). The JAR runs fine on Java 24+;
+         no Java 24-specific language features are used in this project. -->
+		<java.version>21</java.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring-boot.version>3.5.3</spring-boot.version>
+		<spring-ai.version>1.1.2</spring-ai.version>
+	</properties>
+
+	<!-- ═══════════════════════════════════════════════════════════════════════
+         Dependency Management — Spring Boot BOM first, then Spring AI BOM.
+         The Spring AI BOM manages all spring-ai artifact versions, including
+         the transitive MCP SDK (mcp-core) version.
+         ═══════════════════════════════════════════════════════════════════════ -->
+	<dependencyManagement>
+		<dependencies>
+			<!-- Spring Boot BOM — manages Spring Framework, Jackson, SLF4J,
+			etc. -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<!-- Spring AI BOM — manages all spring-ai-* artifact versions -->
+			<dependency>
+				<groupId>org.springframework.ai</groupId>
+				<artifactId>spring-ai-bom</artifactId>
+				<version>${spring-ai.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+
+		<!-- ─── Spring AI MCP Server (WebMVC / Stateless HTTP) ───────────────
+             This starter auto-configures the MCP server endpoint at POST /mcp.
+             Uses STATELESS protocol: every request is a plain POST → response.
+             No SSE sessions needed — works with any HTTP load balancer.
+             ─────────────────────────────────────────────────────────────────── -->
+		<dependency>
+			<groupId>org.springframework.ai</groupId>
+			<artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
+		</dependency>
+
+		<!-- ─── Spring Boot Actuator ─────────────────────────────────────────
+             Exposes /actuator/health, /actuator/info management endpoints.
+             ─────────────────────────────────────────────────────────────────── -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+
+		<!-- ─── Configuration Processor ─────────────────────────────────────
+             Generates IDE metadata for @ConfigurationProperties classes.
+             ─────────────────────────────────────────────────────────────────── -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- ─── Test ─────────────────────────────────────────────────────────
+             JUnit 5 + Spring Boot Test support.
+             ─────────────────────────────────────────────────────────────────── -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+
+			<!-- Maven Compiler Plugin — targets Java 24 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.14.0</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<!-- Required so Spring AI can read parameter names via
+					reflection -->
+					<parameters>true</parameters>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+
+			<!-- Spring Boot Maven Plugin — creates executable fat JAR -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring-boot.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!-- Exclude Lombok from final JAR — only needed at compile
+					time -->
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+
+			<!-- Maven Surefire Plugin — runs JUnit 5 tests -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.5.3</version>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>
