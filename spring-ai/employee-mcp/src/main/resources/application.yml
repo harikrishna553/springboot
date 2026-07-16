@@ -1,0 +1,88 @@
+spring:
+  application:
+    name: employee-mcp
+
+  ai:
+    mcp:
+      server:
+        # Server identity — shown to MCP clients during negotiation
+        name: employee-mcp
+        version: "1.0.0"
+
+        # STATELESS = plain HTTP POST /mcp → response in body.
+        # Works with any HTTP load balancer. No SSE sessions.
+        # The reference project (gdp-connect-mcp) also uses STATELESS.
+        protocol: STATELESS
+
+        # Capabilities advertised to MCP clients
+        capabilities:
+          tool: true       # @Tool methods in EmployeeTools
+          resource: true   # MCP Resources (employees://*)
+          prompt: true     # MCP Prompts (employee-summary, etc.)
+
+        # Instructions shown to the AI client at session start
+        instructions: |
+          This MCP server exposes an Employee Management dataset with ~100 employees
+          across multiple countries, departments, and management levels.
+
+          Available capabilities:
+            Tools (15):
+              - getEmployees            : Paginated employee list
+              - getEmployee             : Single employee by ID
+              - getEmployeesUnderManager: All direct reports of a manager
+              - getEmployeesByCity      : Paginated employees in a city
+              - getEmployeesByCountry   : Paginated employees in a country
+              - getEmployeesByDepartment: Paginated employees in a department
+              - searchEmployees         : Keyword search across name/designation/dept
+              - getManagers             : All employees who have direct reports
+              - getDepartments          : All unique department names
+              - getCountries            : All unique country names
+              - getCities               : All unique city names
+              - countEmployees          : Total / active / inactive counts
+              - countEmployeesByCountry : Employee count per country
+              - countEmployeesByDepartment: Employee count per department
+              - getOrganizationHierarchy: Full org tree (CEO → VP → Director → …)
+
+            Resources (15):
+              employees://all, employees://countries, employees://cities,
+              employees://departments, employees://organization, employees://managers,
+              employees://statistics, employees://engineering, employees://sales,
+              employees://finance, employees://hr, employees://marketing,
+              employees://support, employees://india, employees://usa
+
+            Prompts (7):
+              employee-summary, department-summary, country-summary,
+              manager-summary, hr-assistant, employee-search-assistant,
+              organization-explorer
+
+          Pagination is 0-indexed (pageNumber starts at 0).
+
+# ─── Actuator endpoints ───────────────────────────────────────────────────────
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+  endpoint:
+    health:
+      show-details: always
+  info:
+    env:
+      enabled: true
+
+# ─── App info (visible via /actuator/info) ────────────────────────────────────
+info:
+  app:
+    name: Employee MCP Server
+    version: "1.0.0"
+    description: Educational MCP Server built with Spring AI
+
+# ─── Logging ──────────────────────────────────────────────────────────────────
+logging:
+  level:
+    com.sample.app: DEBUG
+    org.springframework.ai.mcp: INFO
+    org.springframework.ai.tool: INFO
+
+server:
+  port: 8080
