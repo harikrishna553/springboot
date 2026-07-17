@@ -1,0 +1,10 @@
+<configuration>
+
+    <logger name="dev.langchain4j.mcp.client" level="OFF"/>
+
+    <!-- or just disable DefaultMcpClient -->
+    <!--
+    <logger name="dev.langchain4j.mcp.client.DefaultMcpClient" level="OFF"/>
+    -->
+
+</configuration>
